@@ -1,0 +1,29 @@
+name: CI/CD Pipeline
+
+on:
+  pull_request:
+    branches: [ main ]  # Exécuté à chaque PR vers main
+
+env:
+  IMAGE_NAME: myapp
+  DOCKER_REGISTRY: ghcr.io/${{ github.repository_owner }}
+  STAGING_COMPOSE_FILE: docker-compose.staging.yml
+jobs:
+  lint:
+    name: 🧹 Lint code
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install flake8
+        run: pip install flake8
+
+      - name: Run flake8
+        run: flake8 app tests
