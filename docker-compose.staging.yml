@@ -2,7 +2,7 @@ version: '3.8'
 
 services:
   web:
-    image: ghcr.io/acerbeni/myapp:pr-${PR_NUMBER}
+    image: ghcr.io/acerbeni/myapp:pr-123
     ports:
       - "8084:80"
 
